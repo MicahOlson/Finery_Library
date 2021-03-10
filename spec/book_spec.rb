@@ -45,4 +45,13 @@ describe('#Book') do
       expect(Book.find(book.id)).to(eq(book))
     end
   end
+
+  describe('#update') do
+    it("updates an book by id") do
+      book = Book.new({title: "The Talisman"})
+      book.save
+      book.update("Cujo")
+      expect(book.title).to(eq("Cujo"))
+    end
+  end
 end

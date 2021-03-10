@@ -38,7 +38,14 @@ class Book
     Book.new({title: title, id: id})
   end
 
+  def update(title)
+    @title = title
+    DB.exec("UPDATE books SET title = '#{@title}' WHERE id = #{@id};")
+  end
 
+  def delete
+    DB.exec("DELETE FROM books WHERE id = #{@id};")
+  end
 
 
 
