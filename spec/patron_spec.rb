@@ -7,7 +7,13 @@ describe('#Patron') do
     end
   end
 
-
+  describe('#==') do
+    it("is the same patron if it has the same attributes as another patron") do
+      patron = Patron.new({name: "Matthew"})
+      patron2 = Patron.new({name: "Matthew"})
+      expect(patron).to(eq(patron2))
+    end
+  end
 
 
 

@@ -2,7 +2,7 @@ class Patron
   attr_reader :id
   attr_accessor :name
 
-  def intialize(attributes)
+  def initialize(attributes)
     @name = attributes[:name]
     @id = attributes[:id]
   end
@@ -16,6 +16,10 @@ class Patron
       patrons.push(Patron.new({name: name, id: id}))
     end
     patrons
+  end
+
+  def ==(patron_to_compare)
+    self.name == patron_to_compare.name
   end
 
 end
