@@ -25,6 +25,16 @@ describe('#Book') do
     end
   end
 
+  describe('.clear') do
+    it("clears all books") do
+      book = Book.new({title: "The Talisman"})
+      book.save
+      book2 = Book.new({title: "Cujo"})
+      book2.save
+      Book.clear
+      expect(Book.all).to(eq([]))
+    end
+  end
 
 
 end
