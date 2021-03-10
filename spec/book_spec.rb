@@ -54,4 +54,15 @@ describe('#Book') do
       expect(book.title).to(eq("Cujo"))
     end
   end
+
+  describe('#delete') do
+    it("deletes an book by id") do
+      book = Book.new({title: "The Talisman"})
+      book.save
+      book2 = Book.new({title: "Cujo"})
+      book2.save
+      book.delete
+      expect(Book.all).to(eq([book2]))
+    end
+  end
 end
