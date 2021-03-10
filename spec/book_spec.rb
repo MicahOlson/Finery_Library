@@ -15,7 +15,15 @@ describe('#Book') do
     end
   end
 
-
+  describe('#save') do
+    it("saves an book") do
+      book = Book.new({title: "The Talisman"})
+      book.save
+      book2 = Book.new({title: "Cujo"})
+      book2.save
+      expect(Book.all).to(eq([book, book2]))
+    end
+  end
 
 
 

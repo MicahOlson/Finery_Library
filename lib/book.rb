@@ -22,6 +22,11 @@ class Book
     self.title() == book_to_compare.title()
   end
 
+  def save
+    result = DB.exec("INSERT INTO books (title) VALUES ('#{@title}') RETURNING id;")
+    @id = result.first().fetch("id").to_i
+  end
+
 
 
 
