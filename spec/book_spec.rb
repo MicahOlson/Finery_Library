@@ -36,5 +36,13 @@ describe('#Book') do
     end
   end
 
-
+  describe('.find') do
+    it("finds an book by id") do
+      book = Book.new({title: "The Talisman"})
+      book.save
+      book2 = Book.new({title: "Cujo"})
+      book2.save
+      expect(Book.find(book.id)).to(eq(book))
+    end
+  end
 end
