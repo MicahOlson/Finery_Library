@@ -18,7 +18,9 @@ class Book
     books
   end
 
-
+  def ==(book_to_compare)
+    self.title() == book_to_compare.title()
+  end
 
 
 
