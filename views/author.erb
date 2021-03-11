@@ -1,0 +1,21 @@
+<% if @author %>
+  <h2>Author: <%= @author.name %></h2>
+  <h3>Available Books</h3>
+    <% if false %>
+      <ol>
+        <% @author.books.each do |book| %>
+          <li><a href="/authors/<%= @author.id %>/books/<%= book.id %>"><%= book.name %></a></li>
+        <% end %>
+      </ol>
+    <% else %>
+      <p>There are no books listed for this author yet.</p>
+    <% end %>
+   
+  <p><a href="/authors/<%= @author.id %>/edit">Edit author</a></p>
+  <p><a href="/authors">Return to author list</a></p>
+
+<% else %>
+  <h3>Looks like this author id isn't in our catalogue.</h3>
+  <p><a href="/">Return home</a></p>
+
+<% end %>

@@ -1,0 +1,23 @@
+<h1>Finery Library</h1>
+
+<h3>Available Books</h3>
+
+<form action="/books">
+  <div class="form-group">
+    <label for="search">Search</label>
+    <input id="books_search" name="search" class="form-control" type="text" required>
+  </div>
+  <button type="submit" class="btn">Search</button>
+</form>
+
+<% if @books.any? %>
+  <ul>
+    <% @books.each do |book| %>
+      <li><a href="/books/<%= book.id %>"><%= book.title %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no books to display.</p>
+<% end %>
+
+<p><a href="/books/new">Add a new book</a></p>

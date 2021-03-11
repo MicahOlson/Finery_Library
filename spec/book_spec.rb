@@ -65,4 +65,19 @@ describe('#Book') do
       expect(Book.all).to(eq([book2]))
     end
   end
+
+  describe('#add_author') do
+    it("adds author and book id to authors_books JOIN table") do
+      author = Author.new({name: "Stephen King"})
+      author.save
+      book = Book.new({title: "The Talisman"})
+      book.save
+      book.add_author(author.id)
+      # find from authors_books
+      join = DB.exec("SELECT * FROM authors_books WHERE book_id = #{book.id};").first
+      author_id = join["author_id"].to_i
+      book_id = join["book_id"].to_i
+      expect([author.id, book.id]).to(eq([author_id, book_id]))
+    end
+  end
 end

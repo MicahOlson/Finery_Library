@@ -46,4 +46,8 @@ class Book
   def delete
     DB.exec("DELETE FROM books WHERE id = #{@id};")
   end
+
+  def add_author(author_id)
+    DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{author_id}, #{@id});")
+  end
 end

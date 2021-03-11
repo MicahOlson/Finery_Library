@@ -1,0 +1,10 @@
+<% if @book %>
+  <h2>Book: <%= @book.title %></h2>
+  <p><a href="/books/<%= @book.id %>/edit">Edit book</a></p>
+
+<% else %>
+  <h3>Looks like this book id isn't in our catalogue.</h3>
+
+<% end %>
+
+<p><a href="/">Return home</a></p>
