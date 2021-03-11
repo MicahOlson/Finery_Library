@@ -73,11 +73,8 @@ describe('#Book') do
       book = Book.new({title: "The Talisman"})
       book.save
       book.add_author(author.id)
-      # find from authors_books
-      join = DB.exec("SELECT * FROM authors_books WHERE book_id = #{book.id};").first
-      author_id = join["author_id"].to_i
-      book_id = join["book_id"].to_i
-      expect([author.id, book.id]).to(eq([author_id, book_id]))
+      book.add_author("NULL")
+      expect(book.authors).to(eq([author]))
     end
   end
 end

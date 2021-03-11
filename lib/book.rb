@@ -48,6 +48,19 @@ class Book
   end
 
   def add_author(author_id)
-    DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{author_id}, #{@id});")
+    if author_id != "NULL"
+      DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{author_id}, #{@id});")
+    end
+  end
+
+  def authors
+    returned_author_ids = DB.exec("SELECT * FROM authors_books WHERE book_id = #{@id};")
+    authors =[]
+    returned_author_ids.each() do |id_set|
+      author_id = id_set.fetch("author_id").to_i
+      author_name = DB.exec("SELECT name FROM authors WHERE id = #{author_id};").first["name"]
+      authors.push(Author.new({name: author_name, id: author_id}))
+    end
+    authors
   end
 end
