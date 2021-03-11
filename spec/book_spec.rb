@@ -66,15 +66,20 @@ describe('#Book') do
     end
   end
 
-  describe('#add_author') do
+  describe('#add_authors') do
     it("adds author and book id to authors_books JOIN table") do
       author = Author.new({name: "Stephen King"})
       author.save
+      author2 = Author.new({name: "Peter Straub"})
+      author2.save
       book = Book.new({title: "The Talisman"})
       book.save
-      book.add_author(author.id)
-      book.add_author("NULL")
-      expect(book.authors).to(eq([author]))
+      book.add_authors([author.id])
+      book.add_authors([author.id])
+      book.add_authors([author2.id])
+      book.add_authors([author2.id])
+      # binding.pry
+      expect(book.authors).to(eq([author, author2]))
     end
   end
 end

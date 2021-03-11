@@ -47,6 +47,7 @@ end
 patch('/books/:id') do
   @book = Book.find(params[:id].to_i)
   updates = params[:title]
+  @book.add_authors([params[:book_author].to_i])
   @book.update(updates)
   @books = Book.all
   erb(:books)
