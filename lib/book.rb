@@ -47,11 +47,9 @@ class Book
     DB.exec("DELETE FROM books WHERE id = #{@id};")
   end
 
-  def add_authors(author_ids)
-    author_ids.each do |author_id|
-      if !DB.exec("SELECT * FROM authors_books WHERE author_id = #{author_id};").first
-        DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{author_id}, #{@id});")
-      end
+  def add_author(author_id)
+    if !DB.exec("SELECT * FROM authors_books WHERE author_id = #{author_id} AND book_id = #{@id};").first
+      DB.exec("INSERT INTO authors_books (author_id, book_id) VALUES (#{author_id}, #{@id});")
     end
   end
 

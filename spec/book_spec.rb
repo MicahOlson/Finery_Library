@@ -66,20 +66,34 @@ describe('#Book') do
     end
   end
 
-  describe('#add_authors') do
-    it("adds author and book id to authors_books JOIN table") do
-      author = Author.new({name: "Stephen King"})
-      author.save
-      author2 = Author.new({name: "Peter Straub"})
-      author2.save
+  describe('#add_author') do
+    it("adds author and book id relationship to authors_books JOIN table only once") do
       book = Book.new({title: "The Talisman"})
       book.save
-      book.add_authors([author.id])
-      book.add_authors([author.id])
-      book.add_authors([author2.id])
-      book.add_authors([author2.id])
-      # binding.pry
+      book2 = Book.new({title: "Cujo"})
+      book2.save
+      book3 = Book.new({title: "Stardust"})
+      book3.save
+      
+      author = Author.new({name: "Stephen King"})  # authored The Talisman, Cujo
+      author.save
+      author2 = Author.new({name: "Peter Straub"})  # authored The Talisman
+      author2.save
+      author3 = Author.new({name: "Neil Gaiman"})  # authored Stardust
+      author3.save
+      
+      book.add_author(author.id)
+      book.add_author(author2.id)
+      book2.add_author(author.id)
+      book3.add_author(author3.id)
+      
+      book.add_author(author.id)
+      book.add_author(author2.id)
+      book2.add_author(author.id)
+      book3.add_author(author3.id)
+      
       expect(book.authors).to(eq([author, author2]))
+      expect(book3.authors).to(eq([author3]))
     end
   end
 end
